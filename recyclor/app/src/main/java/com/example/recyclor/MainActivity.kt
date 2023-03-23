@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.nav_register -> replaceFragment(SignUp())
+                R.id.nav_map -> replaceFragment(MapsActivity())
+                R.id.nav_order -> replaceFragment(Orders())
             }
             true
         }
