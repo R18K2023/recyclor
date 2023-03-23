@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.nav_register -> replaceFragment(SignUp())
+                R.id.nav_search -> replaceFragment(SearchFragment())
             }
             true
         }
