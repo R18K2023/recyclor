@@ -16,6 +16,8 @@
     android:title="Tilaus
 "/>
 
-
+        <item
+            android:id="@+id/nav_search"
+            android:title="Hae lajitteluohjetta" />
     </group>
 </menu>
