@@ -4,9 +4,17 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_register"
-            android:title="Rekisteröidy" />
+<item
+    android:id="@+id/nav_map"
+    android:title="Kartta"/>
+<item
+    android:id="@+id/nav_register"
+    android:title="Rekisteröidy"/>
+
+<item
+    android:id="@+id/nav_order"
+    android:title="Tilaus
+"/>
 
         <item
             android:id="@+id/nav_search"
