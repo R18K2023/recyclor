@@ -4,20 +4,31 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-<item
-    android:id="@+id/nav_map"
-    android:title="Kartta"/>
-<item
-    android:id="@+id/nav_register"
-    android:title="Rekisteröidy"/>
+        <item
+            android:id="@+id/nav_menu"
+            android:title="Valikko"/>
 
-<item
-    android:id="@+id/nav_order"
-    android:title="Tilaus
-"/>
+        <item
+            android:id="@+id/nav_map"
+            android:title="Kartta"/>
+
+        <item
+            android:id="@+id/nav_order"
+            android:title="Tilaus"/>
 
         <item
             android:id="@+id/nav_search"
             android:title="Hae lajitteluohjetta" />
+
+        <item
+            android:id="@+id/nav_login"
+            android:title="Kirjaudu"/>
+        <item
+            android:id="@+id/nav_register"
+            android:title="Rekisteröidy"/>
+
+        <item
+            android:id="@+id/nav_settings"
+            android:title="asetukset"/>
     </group>
 </menu>

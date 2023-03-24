@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_map -> replaceFragment(MapsActivity())
                 R.id.nav_order -> replaceFragment(Orders())
                 R.id.nav_search -> replaceFragment(SearchFragment())
+                R.id.nav_menu -> replaceFragment(MenuFragment())
+                R.id.nav_settings -> replaceFragment(SettingsFragment())
+                R.id.nav_login -> replaceFragment(Login())
             }
             true
         }
