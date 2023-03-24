@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/.idea/recyclor.iml" filepath="$PROJECT_DIR$/.idea/recyclor.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/.idea/android_projekti.iml" filepath="$PROJECT_DIR$/.idea/android_projekti.iml" />
->>>>>>> origin/dev
+      <module fileurl="file://$PROJECT_DIR$/.idea/AndroidProju.iml" filepath="$PROJECT_DIR$/.idea/AndroidProju.iml" />
     </modules>
   </component>
 </project>
