@@ -28,6 +28,7 @@
         android:name="com.example.recyclor.Orders"
         android:label="activity_orders"
         tools:layout="@layout/activity_orders" />
+
     <fragment
         android:id="@+id/mapsActivity"
         android:name="com.example.recyclor.MapsActivity"
