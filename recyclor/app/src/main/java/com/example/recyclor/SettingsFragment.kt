@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +29,8 @@ class SettingsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +53,18 @@ class SettingsFragment : Fragment() {
         btnRegister.setOnClickListener { replaceFragment(SignUp()) }
         themeSwitch.setOnCheckedChangeListener { _, b ->
             when (b) {
-                true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                true ->  {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    viewModel.setTheme(true)
+                }
 
-                false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                false -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    viewModel.setTheme(false)
+                }
             }
         }
         val isNightModeOn: Boolean = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
-        println(isNightModeOn)
         themeSwitch.isChecked = isNightModeOn
 
         return view
