@@ -45,7 +45,7 @@ class MenuFragment : Fragment() {
         btnLajittelu.setOnClickListener { replaceFragment(SearchFragment()) }
         btnNouto.setOnClickListener { replaceFragment(Orders()) }
         btnAsetukset.setOnClickListener { replaceFragment(SettingsFragment()) }
-        btnKartta.setOnClickListener { replaceFragment(MapsActivity()) }
+        btnKartta.setOnClickListener { replaceFragment(MapsFragment()) }
         return view
     }
 
