@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import androidx.fragment.app.commit
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +37,23 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_menu, container, false)
+        val btnLajittelu: Button = view.findViewById<Button>(R.id.buLajittelu)
+        val btnNouto: Button = view.findViewById<Button>(R.id.buNouto)
+        val btnAsetukset: Button = view.findViewById<Button>(R.id.buAsetukset)
+        val btnKartta: Button = view.findViewById<Button>(R.id.buKartta)
+        btnLajittelu.setOnClickListener { replaceFragment(SearchFragment()) }
+        btnNouto.setOnClickListener { replaceFragment(Orders()) }
+        btnAsetukset.setOnClickListener { replaceFragment(SettingsFragment()) }
+        btnKartta.setOnClickListener { replaceFragment(MapsActivity()) }
+        return view
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = parentFragmentManager
+        fragmentManager.commit {
+            replace(R.id.frame_layout, fragment)
+        }
     }
 
     companion object {
@@ -56,4 +75,5 @@ class MenuFragment : Fragment() {
                 }
             }
     }
+
 }

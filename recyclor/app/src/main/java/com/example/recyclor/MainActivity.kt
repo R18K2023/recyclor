@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_menu -> replaceFragment(MenuFragment())
                 R.id.nav_settings -> replaceFragment(SettingsFragment())
                 R.id.nav_login -> replaceFragment(Login())
+
             }
             true
         }

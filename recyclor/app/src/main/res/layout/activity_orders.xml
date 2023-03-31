@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Orders">
+    tools:context=".Orders">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btOrder"
+        android:id="@+id/buOrder"
         style="@style/ButtonGray"
         android:layout_width="187dp"
         android:layout_height="46dp"
