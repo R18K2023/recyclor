@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SearchResultAdapter(private val dataList: ArrayList<Waste>) :
     RecyclerView.Adapter<SearchResultAdapter.ViewHolderClass>() {
+
+    var onItemClick:((Waste)->Unit)?=null
+
     class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val wasteName: TextView = itemView.findViewById(R.id.jätteenNimi)
     }
@@ -28,6 +31,10 @@ class SearchResultAdapter(private val dataList: ArrayList<Waste>) :
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
         val currentItem = dataList[position]
         holder.wasteName.text = currentItem.wasteName
+
+        holder.wasteName.setOnClickListener{
+            onItemClick?.invoke(currentItem)
+        }
     }
 
     override fun getItemCount(): Int {

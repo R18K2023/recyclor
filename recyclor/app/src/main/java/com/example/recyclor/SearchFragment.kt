@@ -1,16 +1,15 @@
 package com.example.recyclor
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class SearchFragment : Fragment() {
@@ -18,13 +17,11 @@ class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var wasteList: ArrayList<Waste>
     lateinit var wasteName: Array<String>
+    lateinit var wasteDetail: Array<String>
     private lateinit var searchView: SearchView
     private lateinit var searchBtn: Button
     private lateinit var searchList: ArrayList<Waste>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var adapterClass: SearchResultAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +65,32 @@ class SearchFragment : Fragment() {
             "hiuslakkapullo (ei hölsky eikä pihise)",
             "huonekalu tai sen osa (pieni, pisin mitta 40 cm)",
             "huonekalu (iso)"
+        )
+
+        wasteDetail = arrayOf(
+            getString(R.string.aerosolipullo),
+            getString(R.string.aerosolipullo_tyhja),
+            getString(R.string.akku_laitteen_pieni),
+            getString(R.string.akku_lyijyakku),
+            getString(R.string.akku_sahkopyoran),
+            getString(R.string.alumiinipinnoitettu_paperi),
+            getString(R.string.astiat_pieni),
+            getString(R.string.astiat_suuri),
+            getString(R.string.autonlasi),
+            getString(R.string.betoni),
+            getString(R.string.biojate),
+            getString(R.string.cdlevy),
+            getString(R.string.energiansaastolamppu),
+            getString(R.string.folio),
+            getString(R.string.grilli_kaasu_hiili),
+            getString(R.string.grilli_sahko),
+            getString(R.string.haitalliset_vieraskasvit),
+            getString(R.string.halogeenilamppu),
+            getString(R.string.hehkulamppu),
+            getString(R.string.hiuslakkapullo),
+            getString(R.string.hiuslakkapullo_tyhja),
+            getString(R.string.huonekalu_pieni),
+            getString(R.string.huonekalu_iso)
         )
 
         getData()
@@ -115,11 +138,28 @@ class SearchFragment : Fragment() {
             }
 
         })
+
+        adapterClass = SearchResultAdapter(searchList)
+        recyclerView.adapter = adapterClass
+        adapterClass.onItemClick = { data ->
+            val bundle = Bundle().apply {
+                putString("title", data.wasteName)
+                putString("detail", data.wasteDetail)
+            }
+
+            val searchResultFragment= SearchResultFragment()
+            searchResultFragment.arguments = bundle
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.frame_layout, searchResultFragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun getData() {
         for (i in wasteName.indices) {
-            val dataClass = Waste(wasteName[i])
+            val dataClass = Waste(wasteName[i], wasteDetail[i])
             wasteList.add(dataClass)
         }
         searchList.addAll(wasteList)
