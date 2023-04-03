@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -37,59 +36,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/sv_hae"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_et"
+                    android:inputType="text"
                     android:textColorHint="@color/gray"
-                    app:hintTextColor="@color/gray"
+                    android:textSize="16sp"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    android:layout_weight="1">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_eNimi"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="16dp"
-                        android:textSize="16sp"
-                        android:background="@drawable/bg_et"
-                        android:hint="Esimerkiksi maali"
-                        android:inputType="textPersonName" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+                    app:defaultQueryHint="Esimerkiksi maali"
+                    app:hintTextColor="@color/gray"
+                    app:iconifiedByDefault="false"
+                    app:searchIcon="@null" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button"
+                    android:id="@+id/btn_hae"
+                    style="@style/ButtonGray"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    style="@style/ButtonGray"
                     android:text="HAE" />
 
             </LinearLayout>
 
-
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_jätteet"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:lineSpacingExtra="10sp"
-            android:text="@string/malliteksti"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </FrameLayout>
