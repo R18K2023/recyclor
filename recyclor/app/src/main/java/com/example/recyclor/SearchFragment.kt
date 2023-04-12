@@ -18,6 +18,7 @@ class SearchFragment : Fragment() {
     private lateinit var wasteList: ArrayList<Waste>
     lateinit var wasteName: Array<String>
     lateinit var wasteDetail: Array<String>
+    lateinit var wasteWhereTo: Array<String>
     private lateinit var searchView: SearchView
     private lateinit var searchBtn: Button
     private lateinit var searchList: ArrayList<Waste>
@@ -42,55 +43,81 @@ class SearchFragment : Fragment() {
         searchList = arrayListOf<Waste>()
 
         wasteName = arrayOf(
-            "aerosolipullo (hölskyy, pihisee)",
-            "aerosolipullo (tyhjä; ei hölsky eikä pihise)",
-            "akku (laitteen pieni akku)",
-            "akku (ajoneuvon lyijyakku)",
-            "akku (sähköpyörän tai -laudan)",
-            "alumiinipinnoitettu paperi",
-            "astiat (pieni määrä, alle 5 kg)",
-            "astiat (suuri määrä, yli 5 kg)",
-            "autonlasi",
-            "betoni",
-            "biojäte",
+            "Aerosolipullo (hölskyy, pihisee)",
+            "Aerosolipullo (tyhjä; ei hölsky eikä pihise)",
+            "Akku (laitteen pieni akku)",
+            "Akku (ajoneuvon lyijyakku)",
+            "Akku (sähköpyörän tai -laudan)",
+            "Alumiinipinnoitettu paperi",
+            "Astiat (pieni määrä, alle 5 kg)",
+            "Astiat (suuri määrä, yli 5 kg)",
+            "Autonlasi",
+            "Betoni",
+            "Biojäte",
             "CD-levy",
-            "energiansäästölamppu",
-            "folio (paperi, vuoka)",
-            "grilli (kaasu, hiili)",
-            "grilli (sähkö)",
-            "haitalliset vieraskasvilajit (esim. jättipalsami, jättiputki, komealupiini, kurtturuusu)",
-            "halogeenilamppu",
-            "hehkulamppu",
-            "hiuslakkapullo (hölskyy, pihisee)",
-            "hiuslakkapullo (ei hölsky eikä pihise)",
-            "huonekalu tai sen osa (pieni, pisin mitta 40 cm)",
-            "huonekalu (iso)"
+            "Energiansäästölamppu",
+            "Folio (paperi, vuoka)",
+            "Grilli (kaasu, hiili)",
+            "Grilli (sähkö)",
+            "Haitalliset vieraskasvilajit (esim. jättipalsami, jättiputki, komealupiini, kurtturuusu)",
+            "Halogeenilamppu",
+            "Hehkulamppu",
+            "Hiuslakkapullo (hölskyy, pihisee)",
+            "Hiuslakkapullo (ei hölsky eikä pihise)",
+            "Huonekalu tai sen osa (pieni, pisin mitta 40 cm)",
+            "Huonekalu (iso)"
         )
 
         wasteDetail = arrayOf(
-            getString(R.string.aerosolipullo),
-            getString(R.string.aerosolipullo_tyhja),
-            getString(R.string.akku_laitteen_pieni),
-            getString(R.string.akku_lyijyakku),
-            getString(R.string.akku_sahkopyoran),
-            getString(R.string.alumiinipinnoitettu_paperi),
-            getString(R.string.astiat_pieni),
-            getString(R.string.astiat_suuri),
-            getString(R.string.autonlasi),
-            getString(R.string.betoni),
-            getString(R.string.biojate),
-            getString(R.string.cdlevy),
-            getString(R.string.energiansaastolamppu),
-            getString(R.string.folio),
-            getString(R.string.grilli_kaasu_hiili),
-            getString(R.string.grilli_sahko),
-            getString(R.string.haitalliset_vieraskasvit),
-            getString(R.string.halogeenilamppu),
-            getString(R.string.hehkulamppu),
-            getString(R.string.hiuslakkapullo),
-            getString(R.string.hiuslakkapullo_tyhja),
-            getString(R.string.huonekalu_pieni),
-            getString(R.string.huonekalu_iso)
+            "Vaarallinen jäte",
+            "Metalli",
+            "Vaarallinen jäte",
+            "Vaarallinen jäte",
+            "Vaarallinen jäte",
+            "Sekajäte",
+            "Sekajäte",
+            "Sekajäte",
+            "Lasijäte (tai sekajäte)",
+            "Betoni-, tiili- ja laattajäte",
+            "Biojäte",
+            "Sekajäte",
+            "Vaarallinen jäte",
+            "Metalli",
+            "Metalli",
+            "Sähkölaitekeräys",
+            "Sekajäte",
+            "Sekajäte",
+            "Sekajäte",
+            "Vaarallinen jäte",
+            "Metalli",
+            "Sekajäte",
+            "Sekajäte"
+        )
+
+        wasteWhereTo = arrayOf(
+            "Oivapiste, jäteasema tai vaarallisen jätteen vastaanottopiste",
+            "Kiinteistön metallinkeräysastia, Rinkiekopiste, Oivapiste tai jäteasema",
+            "Kaupan paristokeräys, Oivapiste, jäteasema",
+            "Myyjäliike, Oivapiste, jäteasema",
+            "Myyjäliike, Oivapiste, jäteasema",
+            "null",
+            "null",
+            "Ruskon jätekeskus tai jäteasema",
+            "Ruskon jätekeskus tai jäteasema",
+            "Kierrätyspiha Kirsille tai rakennusjätteen joukossa Lajitteluareena Larelle Ruskon jätekeskukseen",
+            "Pakkaa tavalliseen muovipussiin, paperipussiin tai sanomalehteen, tai jos pihan biojäteastiassa on suojasäkki, laita biojäteastiaan ilman käärettä tai pussia",
+            "null",
+            "Kaupat, Oivapiste, jäteasema tai vaarallisen jätteen vastaanottopiste",
+            "Kiinteistön metallinkeräysastia, Rinki-ekopiste, Oivapiste tai jäteasema",
+            "Oivapiste tai jäteasema",
+            "Jäteasema tai Oivapiste",
+            "null",
+            "null",
+            "null",
+            "Oivapiste, jäteasema tai vaarallisen jätteen vastaanottopiste",
+            "Kiinteistön metallinkeräysastia, jäteaseman metallinkeräys, Rinkiekopisteen metallinkeräys",
+            "null",
+            "Ruskon jätekeskus tai jäteasema"
         )
 
         getData()
@@ -145,6 +172,7 @@ class SearchFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("title", data.wasteName)
                 putString("detail", data.wasteDetail)
+                putString("where", data.wasteWhereTo)
             }
 
             val searchResultFragment= SearchResultFragment()
@@ -159,7 +187,7 @@ class SearchFragment : Fragment() {
 
     private fun getData() {
         for (i in wasteName.indices) {
-            val dataClass = Waste(wasteName[i], wasteDetail[i])
+            val dataClass = Waste(wasteName[i], wasteDetail[i], wasteWhereTo[i])
             wasteList.add(dataClass)
         }
         searchList.addAll(wasteList)

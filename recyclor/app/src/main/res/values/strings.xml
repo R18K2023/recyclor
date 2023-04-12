@@ -20,30 +20,6 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
-    <!-- Jätelajitteluohjeet -->
-    <string name="aerosolipullo">vaarallinen jäte</string>
-    <string name="aerosolipullo_tyhja">metalli</string>
-    <string name="akku_laitteen_pieni">vaarallinen jäte</string>
-    <string name="akku_lyijyakku">vaarallinen jäte</string>
-    <string name="akku_sahkopyoran">vaarallinen jäte</string>
-    <string name="alumiinipinnoitettu_paperi">polttokelpoinen jäte</string>
-    <string name="astiat_pieni">polttokelpoinen jäte</string>
-    <string name="astiat_suuri">sekajäte</string>
-    <string name="autonlasi">lasijäte (tai sekajäte)</string>
-    <string name="betoni">betoni-, tiili- ja laattajätteenä Kierrätyspiha Kirsille tai rakennusjätteen joukossa Lajitteluareena Larelle Ruskon jätekeskukseen</string>
-    <string name="biojate">pakkaa tavalliseen muovipussiin, paperipussiin tai sanomalehteen, tai jos pihan biojäteastiassa on suojasäkki, laita biojäteastiaan ilman käärettä tai pussia</string>
-    <string name="cdlevy">polttokelpoinen jäte</string>
-    <string name="energiansaastolamppu">vaarallinen jäte</string>
-    <string name="folio">metalli</string>
-    <string name="grilli_kaasu_hiili">metalli</string>
-    <string name="grilli_sahko">sähkölaitekeräys</string>
-    <string name="haitalliset_vieraskasvit">polttokelpoinen sekajäte, lisätietoja: www.kiertokaari.fi/vieraslajit/</string>
-    <string name="halogeenilamppu">polttokelpoinen jäte</string>
-    <string name="hehkulamppu">polttokelpoinen jäte</string>
-    <string name="hiuslakkapullo">vaarallinen jäte</string>
-    <string name="hiuslakkapullo_tyhja">kiinteistön metallinkeräysastia, jäteaseman metallinkeräys, Rinkiekopisteen metallinkeräys</string>
-    <string name="huonekalu_pieni">polttokelpoinen jäte</string>
-    <string name="huonekalu_iso">sekajäte</string>
 
 
 </resources>

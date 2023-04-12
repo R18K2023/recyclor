@@ -25,11 +25,14 @@ class SearchResultFragment : Fragment() {
 
         val wasteNameTV=view.findViewById<TextView>(R.id.tv_jätteenNimi)
         val wasteDetailTV=view.findViewById<TextView>(R.id.tv_lajitteluohje)
+        val wasteWhereToTV=view.findViewById<TextView>(R.id.tv_minneOhjeet)
 
         val wasteName =arguments?.getString("title")
         val wasteDetail = arguments?.getString("detail")
+        val wasteWhereTo=arguments?.getString("where")
 
         wasteNameTV.text=wasteName
         wasteDetailTV.text=wasteDetail
+        wasteWhereToTV.text=wasteWhereTo
     }
 }
