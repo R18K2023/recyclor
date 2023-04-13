@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "471759914542",
+    "firebase_url": "https://recyclor18-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "recyclor18",
+    "storage_bucket": "recyclor18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471759914542:android:ec5bb39e8c504e7c6b01bf",
+        "android_client_info": {
+          "package_name": "com.example.recyclor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471759914542-70b8u2q31omcd24vcieaj91ssgqolfov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.recyclor",
+            "certificate_hash": "f52243fab266a8ac0850d01894c86c8af8407f23"
+          }
+        },
+        {
+          "client_id": "471759914542-823bop55qae325qj0nntpcodlgbvlf8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvceme8WAvmxhHNdOaHQClx-jE3UIxb9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471759914542-823bop55qae325qj0nntpcodlgbvlf8c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
