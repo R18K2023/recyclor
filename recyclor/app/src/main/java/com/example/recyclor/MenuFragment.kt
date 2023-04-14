@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.commit
 
 // TODO: Rename parameter arguments, choose names that match
@@ -53,6 +52,7 @@ class MenuFragment : Fragment() {
         val fragmentManager = parentFragmentManager
         fragmentManager.commit {
             replace(R.id.frame_layout, fragment)
+            addToBackStack(null)
         }
     }
 

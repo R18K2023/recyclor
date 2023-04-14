@@ -1,6 +1,5 @@
 package com.example.recyclor
 
-import android.icu.text.CaseMap.Title
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.flow.first
@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var toggle: ActionBarDrawerToggle
-    lateinit var drawerLayout: DrawerLayout
+    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var drawerLayout: DrawerLayout
     private lateinit var dataStoreManager: DataStoreManager
     private val viewModel: MainViewModel by viewModels()
 
@@ -26,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dataStoreManager = DataStoreManager(this)
+        if(savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.frame_layout, MenuFragment())
+            }
+        }
 
         checkThemeMode()
 
@@ -65,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout,fragment)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         drawerLayout.closeDrawers()
     }

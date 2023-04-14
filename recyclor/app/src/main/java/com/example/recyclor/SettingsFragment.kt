@@ -10,10 +10,7 @@ import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,8 +68,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = parentFragmentManager
-        fragmentManager.commit {
+        parentFragmentManager.commit {
             replace(R.id.frame_layout, fragment)
         }
     }
