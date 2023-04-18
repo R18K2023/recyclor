@@ -42,27 +42,17 @@
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/sv_hae"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@drawable/bg_et"
                     android:inputType="text"
                     android:textColorHint="@color/gray"
                     android:textSize="16sp"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:defaultQueryHint="Esimerkiksi maali"
                     app:hintTextColor="@color/gray"
                     app:iconifiedByDefault="false"
-                    app:searchIcon="@null" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_hae"
-                    style="@style/ButtonGray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="HAE" />
+                    app:queryHint="Esimerkiksi maali" />
 
             </LinearLayout>
 
@@ -75,6 +65,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

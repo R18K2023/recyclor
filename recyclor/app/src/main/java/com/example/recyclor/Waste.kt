@@ -1,3 +1,8 @@
 package com.example.recyclor
 
-data class Waste(var wasteName:String, var wasteDetail:String, var wasteWhereTo:String)
+data class Waste(
+    var wasteCode: String = "",
+    var wasteDetail: String = "",
+    var wasteName: String = "",
+    var wasteWhereTo: String = ""
+)
