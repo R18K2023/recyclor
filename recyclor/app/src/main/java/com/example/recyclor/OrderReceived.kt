@@ -11,6 +11,7 @@ class OrderReceived : AppCompatActivity() {
 
     private lateinit var orderReference: DatabaseReference
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_received)
@@ -33,9 +34,14 @@ class OrderReceived : AppCompatActivity() {
                     val size = orderSnapshot.child("size").value.toString()
                     val desc = orderSnapshot.child("description").value.toString()
                     val date = orderSnapshot.child("date").value.toString()
+                    val enimi = orderSnapshot.child("enimi").value.toString()
+                    val snimi = orderSnapshot.child("snimi").value.toString()
+                    val email = orderSnapshot.child("email").value.toString()
+
 
                     val textViewOrder = findViewById<TextView>(R.id.textViewOrder)
-                    textViewOrder.text = "Tilauksen tiedot:\nTyyppi: $type\nKoko: $size\nKuvaus: $desc\nPäivämäärä: $date"
+                    textViewOrder.text = "Tilauksen tiedot:\nTyyppi: $type\nKoko: $size\nKuvaus: $desc\nPäivämäärä: $date\n" +
+                            "Tilaajan tiedot: \nnimi:$enimi\nsukunimi: $snimi\nsähköposti: $email "
                 }
             }
 
