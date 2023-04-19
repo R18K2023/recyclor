@@ -1,10 +1,20 @@
 package com.example.recyclor
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.commit
+import com.example.recyclor.databinding.FragmentLoginBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -23,9 +33,17 @@ class Login : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // viewbinding
+    private lateinit var binding:FragmentLoginBinding
+
     // tietokantarefrenssi on tässä
     val database = Firebase.database
     val myRef = database.reference
+
+    //firebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var email = ""
+    private var salasana = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +51,7 @@ class Login : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -40,8 +59,83 @@ class Login : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val btnKirjaudu: Button = view.findViewById<Button>(R.id.buKirjaudu)
+
+        // alustetaan firebaseAuth
+        firebaseAuth = FirebaseAuth.getInstance()
+        checkUser()
+
+
+
+        // klikkikäsittely
+        btnKirjaudu.setOnClickListener {
+            // datan varmennus ennen kirjautumista
+            validateData()
+        }
+
+        return view
     }
+
+    private fun validateData() {
+        // vastaanotetaan syötetyt kirjautumistiedot
+        email = binding.etEmail.text.toString().trim()
+        salasana = binding.etSalasana.text.toString()
+
+        // varmennetaan ne
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            //vääränmuotoinen säpo
+            binding.etEmail.error = "Tarkista Sähköposti"
+        }
+        else if (TextUtils.isEmpty(salasana)){
+            // salasanaa ei syötetty
+            binding.etSalasana.error = "Syötä Salasana"
+        }
+        else{
+            // syöttö varmennettu
+            firebaseLogin()
+        }
+
+    }
+
+    private fun firebaseLogin() {
+        firebaseAuth.signInWithEmailAndPassword(email,salasana)
+            .addOnSuccessListener {
+                // kirjautuminen onnistui
+                val firebaseUser = firebaseAuth.currentUser
+                val email = firebaseUser!!.email
+                Toast.makeText(this@Login.context, "Kirjauduttu tunnuksella $email", Toast.LENGTH_SHORT).show()
+
+                // avataan noutotilaussivu
+                replaceFragment(Orders())
+            }
+            .addOnFailureListener {e->
+                // kirjautuminen epäonnistui
+                Toast.makeText(this@Login.context, "kirjautuminen epäonnistui ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun checkUser() {
+        // jos ollaan jo kirjauduttu sisälle niin ohjataan muualle.
+        // haetaan käyttäjätiedot
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser != null){
+            // ollaan jo kirjauduttu sisään -> navigoidaan muualle
+            replaceFragment(Orders())
+        }
+
+
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = parentFragmentManager
+        fragmentManager.commit {
+            replace(R.id.frame_layout, fragment)
+        }
+    }
+
+
 
     companion object {
         /**

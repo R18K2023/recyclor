@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.commit
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +25,9 @@ class MenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    //firebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +47,37 @@ class MenuFragment : Fragment() {
         val btnNouto: Button = view.findViewById<Button>(R.id.buNouto)
         val btnAsetukset: Button = view.findViewById<Button>(R.id.buAsetukset)
         val btnKartta: Button = view.findViewById<Button>(R.id.buKartta)
+        val btnLogout: Button = view.findViewById<Button>(R.id.buLogout)
         btnLajittelu.setOnClickListener { replaceFragment(SearchFragment()) }
         btnNouto.setOnClickListener { replaceFragment(Orders()) }
         btnAsetukset.setOnClickListener { replaceFragment(SettingsFragment()) }
         btnKartta.setOnClickListener { replaceFragment(MapsFragment()) }
+        btnLogout.setOnClickListener {
+            firebaseAuth.signOut()
+            checkUser()
+        }
+
+        // alustetaan firebaseAuth
+        firebaseAuth = FirebaseAuth.getInstance()
+        checkUser()
+
         return view
+    }
+
+    private fun checkUser() {
+        // jos ollaan jo kirjauduttu sisälle niin ohjataan muualle.
+        // haetaan käyttäjätiedot
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser != null) {
+            // ollaan jo kirjauduttu sisään -> näytetään sähköpostiosoite ruudulla textviewissä
+            val email = firebaseUser.email
+            view?.findViewById<TextView>(R.id.tv_email)?.text = email
+
+        }
+        else{
+            // käyttäjä ei oo kirjautunu sisälle lisää tähän jotaki...
+
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
