@@ -85,6 +85,7 @@ class SearchFragment : Fragment() {
 
     private fun navigateToSearchResultFragment(data: Waste) {
         val bundle = Bundle().apply {
+            putString("code", data.wasteCode)
             putString("title", data.wasteName)
             putString("detail", data.wasteDetail)
             putString("where", data.wasteWhereTo)

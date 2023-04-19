@@ -29,6 +29,7 @@ class SearchResultFragment : Fragment() {
         val wasteWhereToTV = view.findViewById<TextView>(R.id.tv_minneOhjeet)
         val showMap = view.findViewById<Button>(R.id.btn_keräyspisteet)
 
+        val wasteCode = arguments?.getString("code")
         val wasteName = arguments?.getString("title")
         val wasteDetail = arguments?.getString("detail")
         val wasteWhereTo = arguments?.getString("where")
@@ -39,6 +40,13 @@ class SearchResultFragment : Fragment() {
 
         showMap.setOnClickListener {
             val targetFragment = MapsFragment()
+
+            val args = Bundle()
+
+            args.putString("code", wasteCode)
+
+            targetFragment.arguments = args
+
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.frame_layout, targetFragment)
                 .addToBackStack(null)
