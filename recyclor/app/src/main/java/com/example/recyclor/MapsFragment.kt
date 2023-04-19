@@ -50,10 +50,15 @@ class MapsFragment : Fragment() {
                     val pointLat = item.geometry?.coordinates?.get(1)
                     val pointLng = item.geometry?.coordinates?.get(0)
                     val pointName = item.name
+                    val pointAddress = item.address
+                    val pointPostalCode = item.postalCode
+                    val pointPostOffice = item.postOffice
+                    val pointTittle = ("$pointName, $pointAddress, $pointPostalCode $pointPostOffice")
+
                     if (pointLat != null) {
                         val pointCoordinates = LatLng(pointLat as Double, pointLng as Double)
                         googleMap.addMarker(
-                            MarkerOptions().position(pointCoordinates).title(pointName)
+                            MarkerOptions().position(pointCoordinates).title(pointTittle)
                         )
                     }
                 }

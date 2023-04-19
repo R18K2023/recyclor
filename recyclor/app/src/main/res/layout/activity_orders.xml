@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Jätetyyppi" />
+            android:hint="Jätetyyppi" />
 
         <EditText
             android:id="@+id/sizeTxt"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Koko ja Paino" />
+            android:hint="Koko ja Paino" />
 
         <EditText
             android:id="@+id/Desc"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Kuvaus" />
+            android:hint="Kuvaus" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

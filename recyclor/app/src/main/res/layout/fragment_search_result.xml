@@ -41,7 +41,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:text="Mitä jätettä?"
-            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -54,7 +53,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:lineSpacingExtra="10sp"
-            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +67,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:text="Minne voit viedä?"
-            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/tv_lajitteluohje" />
@@ -82,7 +79,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:lineSpacingExtra="10sp"
-            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

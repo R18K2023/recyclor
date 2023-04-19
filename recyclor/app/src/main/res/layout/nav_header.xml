@@ -8,9 +8,9 @@
 
 
     <TextView
-        android:id="@+id/blabla"
+        android:id="@+id/Valikko"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bla bla"
-        android:textColor="@color/black"/>
+        android:text="Valikko"
+        android:textColor="@color/black" />
 </LinearLayout>

@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MapsFragment" />
+
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -29,21 +31,9 @@
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="43dp"
-            android:text="Etsi lähin lajittelupiste"
+            android:text="Etsi keräyspisteitä"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/txtView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Valitse etäisyys"
-            android:textSize="16sp" />
-
-        <SeekBar
-            android:id="@+id/SlideBar"
-            android:layout_width="282dp"
-            android:layout_height="22dp"
-            android:paddingLeft="20px" />
     </LinearLayout>
 
 
