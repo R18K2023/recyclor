@@ -41,7 +41,7 @@ class Login : Fragment() {
     val myRef = database.reference
 
     //firebaseAuth
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private var email = ""
     private var salasana = ""
 
@@ -61,18 +61,21 @@ class Login : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
-        val btnKirjaudu: Button = view.findViewById<Button>(R.id.buKirjaudu)
 
         // alustetaan firebaseAuth
-        firebaseAuth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
         checkUser()
 
 
 
         // klikkikäsittely
-        btnKirjaudu.setOnClickListener {
+        binding.buKirjaudu.setOnClickListener {
             // datan varmennus ennen kirjautumista
             validateData()
+        }
+
+        binding.registerNowBtn.setOnClickListener {
+            replaceFragment(SignUp())
         }
 
         return view
@@ -100,15 +103,15 @@ class Login : Fragment() {
     }
 
     private fun firebaseLogin() {
-        firebaseAuth.signInWithEmailAndPassword(email,salasana)
+        auth.signInWithEmailAndPassword(email,salasana)
             .addOnSuccessListener {
                 // kirjautuminen onnistui
-                val firebaseUser = firebaseAuth.currentUser
+                val firebaseUser = auth.currentUser
                 val email = firebaseUser!!.email
                 Toast.makeText(this@Login.context, "Kirjauduttu tunnuksella $email", Toast.LENGTH_SHORT).show()
 
                 // avataan noutotilaussivu
-                replaceFragment(Orders())
+                replaceFragment(MenuFragment())
             }
             .addOnFailureListener {e->
                 // kirjautuminen epäonnistui
@@ -119,10 +122,10 @@ class Login : Fragment() {
     private fun checkUser() {
         // jos ollaan jo kirjauduttu sisälle niin ohjataan muualle.
         // haetaan käyttäjätiedot
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = auth.currentUser
         if (firebaseUser != null){
             // ollaan jo kirjauduttu sisään -> navigoidaan muualle
-            replaceFragment(Orders())
+            replaceFragment(MenuFragment())
         }
 
 

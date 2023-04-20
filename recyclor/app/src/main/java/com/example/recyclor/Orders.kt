@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.commit
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -18,6 +19,7 @@ import java.util.*
 
 class Orders : Fragment() {
 
+    // firebase auth ja tietokanta
     private lateinit var auth: FirebaseAuth
     private lateinit var userReference: DatabaseReference
     val database = Firebase.database
@@ -40,6 +42,10 @@ class Orders : Fragment() {
         val sizeEditText = view.findViewById<EditText>(R.id.sizeTxt)
         val descEditText = view.findViewById<EditText>(R.id.Desc)
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
+
+        // alustetaan firebaseAuth
+        auth = FirebaseAuth.getInstance()
+        checkUser()
 
         // Määritä viite tietokantaan
         val database = Firebase.database
@@ -108,5 +114,27 @@ class Orders : Fragment() {
 
             return view
         }
+
+    private fun checkUser() {
+        // jos ei olla kirjauduttu sisälle niin ohjataan muualle.
+        // haetaan käyttäjätiedot
+        val firebaseUser = auth.currentUser
+        if (firebaseUser != null){
+            // ollaan kirjauduttu sisään -> pysytään sivulla
+        }
+        else{
+            // jos ei olla kirjauduttu sisälle, navigoidaan loginiin
+            replaceFragment(Login())
+        }
+
+
     }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = parentFragmentManager
+        fragmentManager.commit {
+            replace(R.id.frame_layout, fragment)
+        }
+    }
+}
 

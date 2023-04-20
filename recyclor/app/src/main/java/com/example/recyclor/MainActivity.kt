@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var dataStoreManager: DataStoreManager
     private val viewModel: MainViewModel by viewModels()
+
+    //firebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkThemeMode()
+        auth = FirebaseAuth.getInstance()
 
       drawerLayout= findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
@@ -47,17 +52,31 @@ class MainActivity : AppCompatActivity() {
             it.isChecked = true
 
             when(it.itemId){
-                R.id.nav_register -> replaceFragment(SignUp())
                 R.id.nav_map -> replaceFragment(MapsFragment())
                 R.id.nav_order -> replaceFragment(Orders())
                 R.id.nav_search -> replaceFragment(SearchFragment())
                 R.id.nav_menu -> replaceFragment(MenuFragment())
                 R.id.nav_settings -> replaceFragment(SettingsFragment())
-                R.id.nav_login -> replaceFragment(Login())
+                R.id.nav_log -> log()
 
             }
             true
         }
+    }
+
+    private fun log() {
+        val firebaseUser = auth.currentUser
+        if (firebaseUser != null){
+            // ollaan jo kirjauduttu sisään -> kirjaudutaan ulos
+            auth.signOut()
+            replaceFragment(MenuFragment())
+
+        }
+        else{
+            // jos ei olla kirjauduttu sisälle, navigoidaan loginiin
+            replaceFragment(Login())
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
