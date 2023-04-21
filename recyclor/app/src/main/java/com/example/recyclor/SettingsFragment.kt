@@ -105,8 +105,10 @@ class SettingsFragment : Fragment() {
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 Toast.makeText(this@SettingsFragment.context, "Käyttäjätunnus poistettu.", Toast.LENGTH_SHORT).show()
+                                replaceFragment(MenuFragment())
                             }
                         }
+
 
                 } else {
                     Toast.makeText(
@@ -123,13 +125,7 @@ class SettingsFragment : Fragment() {
                 Toast.makeText(this@SettingsFragment.context, "Tietokantavirhe", Toast.LENGTH_SHORT).show()
             }
         })
-
-        user.delete()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this@SettingsFragment.context, "Käyttäjätunnus poistettu.", Toast.LENGTH_SHORT).show()
-                }
-            }
+        checkUser()
     }
 
     private fun checkUser() {
