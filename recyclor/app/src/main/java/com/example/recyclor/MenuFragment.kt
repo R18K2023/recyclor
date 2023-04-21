@@ -70,10 +70,7 @@ class MenuFragment : Fragment() {
             binding.tvEmail.text = email
 
         }
-        else{
-            // käyttäjä ei oo kirjautunu sisälle lisää tähän jotaki...
 
-        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
