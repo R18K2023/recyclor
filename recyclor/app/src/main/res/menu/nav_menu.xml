@@ -4,6 +4,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_menu"
             android:title="Valikko"/>
@@ -21,14 +22,12 @@
             android:title="Hae lajitteluohjetta" />
 
         <item
-            android:id="@+id/nav_login"
-            android:title="Kirjaudu"/>
-        <item
-            android:id="@+id/nav_register"
-            android:title="Rekisteröidy"/>
-
-        <item
             android:id="@+id/nav_settings"
             android:title="Asetukset"/>
+
+        <item
+            android:id="@+id/nav_log"
+            android:title="Kirjaudu Sisään / Ulos"/>
+
     </group>
 </menu>

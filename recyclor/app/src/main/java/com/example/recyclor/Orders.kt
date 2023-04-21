@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.commit
+import com.example.recyclor.databinding.ActivityOrdersBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -18,10 +20,14 @@ import java.util.*
 
 class Orders : Fragment() {
 
+    // firebase auth ja tietokanta
     private lateinit var auth: FirebaseAuth
     private lateinit var userReference: DatabaseReference
     val database = Firebase.database
     val myRef = database.reference
+
+    // viewbinding
+    private lateinit var binding: ActivityOrdersBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +40,13 @@ class Orders : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.activity_orders, container, false)
-        val buOrder = view.findViewById<Button>(R.id.buOrder)
-        val typeEditText = view.findViewById<EditText>(R.id.Type)
-        val sizeEditText = view.findViewById<EditText>(R.id.sizeTxt)
-        val descEditText = view.findViewById<EditText>(R.id.Desc)
-        val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
+        binding = ActivityOrdersBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+
+        // alustetaan firebaseAuth
+        auth = FirebaseAuth.getInstance()
+        checkUser()
 
         // Määritä viite tietokantaan
         val database = Firebase.database
@@ -61,16 +68,13 @@ class Orders : Fragment() {
 
 
                         // Tallenna käyttäjän syöttämät tiedot Firebase-tietokantaan yhdessä käyttäjän tietojen kanssa
-                        buOrder.setOnClickListener {
-                            val type = typeEditText.text.toString()
-                            val size = sizeEditText.text.toString()
-                            val desc = descEditText.text.toString()
-                            val selectedDate = Date(calendarView.date)
+                        binding.buOrder.setOnClickListener {
+                            val selectedDate = Date(binding.calendarView.date)
 
                             val data = hashMapOf(
-                                "type" to type,
-                                "size" to size,
-                                "description" to desc,
+                                "type" to binding.Type.text.toString(),
+                                "size" to binding.sizeTxt.text.toString(),
+                                "description" to binding.Desc.text.toString(),
                                 "date" to selectedDate.toString(),
                                 "enimi" to enimi,
                                 "snimi" to snimi,
@@ -102,11 +106,35 @@ class Orders : Fragment() {
 
                 override fun onCancelled(error: DatabaseError) {
                     // Käsittely virhetilanteessa
-                    // Esim. virheilmoituksen näyttäminen käyttäjälle
+                    Toast.makeText(this@Orders.context, "Tietokantavirhe", Toast.LENGTH_SHORT).show()
                 }
             })
 
             return view
         }
+
+    private fun checkUser() {
+        // jos ei olla kirjauduttu sisälle niin ohjataan muualle.
+        // haetaan käyttäjätiedot
+        val firebaseUser = auth.currentUser
+        if (firebaseUser != null) {
+            // ollaan jo kirjauduttu sisään -> näytetään sähköpostiosoite ruudulla textviewissä
+            val email = firebaseUser.email
+            binding.tvEmail.text = email
+        }
+        else{
+            // jos ei olla kirjauduttu sisälle, navigoidaan loginiin
+            replaceFragment(Login())
+        }
+
+
     }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = parentFragmentManager
+        fragmentManager.commit {
+            replace(R.id.frame_layout, fragment)
+        }
+    }
+}
 

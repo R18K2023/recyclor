@@ -16,11 +16,11 @@ import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import io.ktor.serialization.gson.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.net.URL
 
 
 class MapsFragment : Fragment() {
@@ -31,19 +31,27 @@ class MapsFragment : Fragment() {
                 gson()
             }
         }
-        val apiBaseUrl =
-            "http://api.kierratys.info/collectionspots/?api_key=83926c47ccaf5260ee9d2e597923190377aa7200&limit=265&municipality=Oulu"
-        val urlBuilder = StringBuilder(apiBaseUrl)
-        if (wasteCode != null) {
-            urlBuilder.append("&material=$wasteCode")
+        // laita oma api key tohon alempaan kohtaan vietiin se poijes
+        val recyclingPoints = client.get("http://api.kierratys.info/") {
+            url {
+                appendPathSegments("collectionspots")
+                parameters.append("api_key", "LAITA TÄHÄN OMA API KEY")
+                parameters.append("limit", "265")
+                parameters.append("municipality", "Oulu")
+                if(wasteCode != null){
+                    parameters.append("material", wasteCode)
+                }
+            }
         }
-        val url = URL(urlBuilder.toString())
-        return client.get(url).body()
+
+        return recyclingPoints.body()
     }
 
 
     private val callback = OnMapReadyCallback { googleMap ->
         coroutineScope.launch(Dispatchers.Main) {
+            val oulu = LatLng(65.01, 25.46)
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(oulu, 9f))
             val recyclingPoints = getRecyclingPoints(arguments?.getString("code"))
             for (item in recyclingPoints.results.orEmpty()) {
                 if (item != null) {
@@ -53,18 +61,16 @@ class MapsFragment : Fragment() {
                     val pointAddress = item.address
                     val pointPostalCode = item.postalCode
                     val pointPostOffice = item.postOffice
-                    val pointTittle = ("$pointName, $pointAddress, $pointPostalCode $pointPostOffice")
+                    val pointTittle = ("$pointAddress, $pointPostalCode $pointPostOffice")
 
                     if (pointLat != null) {
                         val pointCoordinates = LatLng(pointLat as Double, pointLng as Double)
                         googleMap.addMarker(
-                            MarkerOptions().position(pointCoordinates).title(pointTittle)
+                            MarkerOptions().position(pointCoordinates).title(pointName).snippet(pointTittle)
                         )
                     }
                 }
             }
-            val oulu = LatLng(65.01, 25.46)
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(oulu, 12f))
         }
 
     }

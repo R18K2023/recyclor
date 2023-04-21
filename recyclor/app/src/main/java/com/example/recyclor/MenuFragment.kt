@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.commit
+import com.example.recyclor.databinding.FragmentMenuBinding
 import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,7 +28,10 @@ class MenuFragment : Fragment() {
     private var param2: String? = null
 
     //firebaseAuth
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
+
+    // viewbinding
+    private lateinit var binding: FragmentMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,23 +46,15 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_menu, container, false)
-        val btnLajittelu: Button = view.findViewById<Button>(R.id.buLajittelu)
-        val btnNouto: Button = view.findViewById<Button>(R.id.buNouto)
-        val btnAsetukset: Button = view.findViewById<Button>(R.id.buAsetukset)
-        val btnKartta: Button = view.findViewById<Button>(R.id.buKartta)
-        val btnLogout: Button = view.findViewById<Button>(R.id.buLogout)
-        btnLajittelu.setOnClickListener { replaceFragment(SearchFragment()) }
-        btnNouto.setOnClickListener { replaceFragment(Orders()) }
-        btnAsetukset.setOnClickListener { replaceFragment(SettingsFragment()) }
-        btnKartta.setOnClickListener { replaceFragment(MapsFragment()) }
-        btnLogout.setOnClickListener {
-            firebaseAuth.signOut()
-            checkUser()
-        }
+        binding = FragmentMenuBinding.inflate(inflater, container, false)
+        val view = binding.root
+        binding.buLajittelu.setOnClickListener { replaceFragment(SearchFragment()) }
+        binding.buNouto.setOnClickListener { replaceFragment(Orders()) }
+        binding.buAsetukset.setOnClickListener { replaceFragment(SettingsFragment()) }
+        binding.buKartta.setOnClickListener { replaceFragment(MapsFragment()) }
 
         // alustetaan firebaseAuth
-        firebaseAuth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
         checkUser()
 
         return view
@@ -67,17 +63,14 @@ class MenuFragment : Fragment() {
     private fun checkUser() {
         // jos ollaan jo kirjauduttu sisälle niin ohjataan muualle.
         // haetaan käyttäjätiedot
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = auth.currentUser
         if (firebaseUser != null) {
             // ollaan jo kirjauduttu sisään -> näytetään sähköpostiosoite ruudulla textviewissä
             val email = firebaseUser.email
-            view?.findViewById<TextView>(R.id.tv_email)?.text = email
+            binding.tvEmail.text = email
 
         }
-        else{
-            // käyttäjä ei oo kirjautunu sisälle lisää tähän jotaki...
 
-        }
     }
 
     private fun replaceFragment(fragment: Fragment) {

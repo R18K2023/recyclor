@@ -48,7 +48,7 @@ class SignUp : Fragment() {
     private var salasana = ""
 
     //firebaseauth
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,13 +67,16 @@ class SignUp : Fragment() {
         val view = binding.root
 
         // alustetaan firebaseAuth
-        firebaseAuth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
         checkUser()
 
         // klikinkäsittely
         binding.buRekisteri.setOnClickListener {
             // varmistetaan syöttötiedot
             validateData()
+        }
+        binding.loginNowBtn.setOnClickListener {
+            replaceFragment(Login())
         }
 
         return view
@@ -146,14 +149,14 @@ class SignUp : Fragment() {
 
     private fun firebaseSignUp() {
         // luodaan tili
-        firebaseAuth.createUserWithEmailAndPassword(email, salasana)
+        auth.createUserWithEmailAndPassword(email, salasana)
             .addOnSuccessListener {
                 // rekisteröinti onnistui
-                val firebaseUser = firebaseAuth.currentUser
+                val firebaseUser = auth.currentUser
                 val email = firebaseUser!!.email
 
                 Toast.makeText(this@SignUp.context, "tili luotu tunnuksella $email", Toast.LENGTH_SHORT).show()
-                replaceFragment(Orders())
+                replaceFragment(MenuFragment())
             }
             .addOnFailureListener { e->
                 // rekiteröinti epäonnistui
@@ -164,16 +167,17 @@ class SignUp : Fragment() {
     private fun checkUser() {
         // jos ollaan jo kirjauduttu sisälle niin ohjataan muualle.
         // haetaan käyttäjätiedot
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = auth.currentUser
         if (firebaseUser != null) {
             // ollaan jo kirjauduttu sisään -> navigoidaan muualle
-            replaceFragment(Orders())
+            replaceFragment(MenuFragment())
         }
     }
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = parentFragmentManager
         fragmentManager.commit {
             replace(R.id.frame_layout, fragment)
+            addToBackStack(null)
         }
     }
 
