@@ -135,6 +135,7 @@ class Login : Fragment() {
         val fragmentManager = parentFragmentManager
         fragmentManager.commit {
             replace(R.id.frame_layout, fragment)
+            addToBackStack(null)
         }
     }
 
