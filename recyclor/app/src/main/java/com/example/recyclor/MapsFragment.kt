@@ -31,11 +31,11 @@ class MapsFragment : Fragment() {
                 gson()
             }
         }
-
+        // laita oma api key tohon alempaan kohtaan vietiin se poijes
         val recyclingPoints = client.get("http://api.kierratys.info/") {
             url {
                 appendPathSegments("collectionspots")
-                parameters.append("api_key", "83926c47ccaf5260ee9d2e597923190377aa7200")
+                parameters.append("api_key", "LAITA TÄHÄN OMA API KEY")
                 parameters.append("limit", "265")
                 parameters.append("municipality", "Oulu")
                 if(wasteCode != null){
